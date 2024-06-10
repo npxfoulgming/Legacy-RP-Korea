@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555555;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0fc7ff;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #2d16ff;
+        }
+        button[type="submit"]:focus {
+            outline: none;
+        }
+        .back-to-login {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-to-login a {
+            color: #333333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .back-to-login a:hover {
+            color: #555555;
+        }
+        .alert {
+            display: none;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .alert.success {
+            background-color: #4CAF50;
+            color: #ffffff;
+        }
+        .alert.error {
+            background-color: #f44336;
+            color: #ffffff;
+        }
+        .error-message {
+            color: #f44336;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        .password-strength {
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        .password-strength span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            border-radius: 50%;
+        }
+        .password-weak {
+            background-color: #f44336;
+        }
+        .password-medium {
+            background-color: #ff9800;
+        }
+        .password-strong {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create Account</h2>
+        <form id="createAccountForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <div class="error-message" id="usernameError"></div>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+            <div class="error-message" id="emailError"></div>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <div class="password-strength" id="passwordStrength"></div>
+            <div class="error-message" id="passwordError"></div>
+            
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+            <div class="error-message" id="confirmPasswordError"></div>
+
+            <button type="submit">Create Account</button>
+        </form>
+        <div class="back-to-login">
+            <a href="/login">Back to Login</a>
+        </div>
+        <div id="alertMessage" class="alert"></div>
+    </div>
+
+    <script>
+        document.getElementById("createAccountForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+
+            // Client-side validation
+            var valid = true;
+            if (!validateUsername(username)) {
+                valid = false;
+                document.getElementById("usernameError").textContent = "Username must be at least 3 characters long.";
+            } else {
+                document.getElementById("usernameError").textContent = "";
+            }
+
+            if (!validateEmail(email)) {
+                valid = false;
+                document.getElementById("emailError").textContent = "Invalid email address.";
+            } else {
+                document.getElementById("emailError").textContent = "";
+            }
+
+            if (!validatePassword(password)) {
+                valid = false;
+                document.getElementById("passwordError").textContent = "Password must be at least 6 characters long.";
+            } else {
+                document.getElementById("passwordError").textContent = "";
+            }
+
+            if (password !== confirmPassword) {
+                valid = false;
+                document.getElementById("confirmPasswordError").textContent = "Passwords do not match.";
+            } else {
+                document.getElementById("confirmPasswordError").textContent = "";
+            }
+
+            if (valid) {
+                var formData = new FormData();
+                formData.append("username", username);
+                formData.append("email", email);
+                formData.append("password", password);
+
+                fetch("/create-account", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showAlert("Account created successfully!", "success");
+                        document.getElementById("createAccountForm").reset();
+                    } else {
+                        showAlert("Error: " + data.message, "error");
+                    }
+                })
+                .catch(error => {
+                    showAlert("An error occurred while creating the account.", "error");
+                    console.error("Error:", error);
+                });
+            }
+        });
+
+        function showAlert(message, type) {
+            var alertElement = document.getElementById("alertMessage");
+            alertElement.textContent = message;
+            alertElement.className = "alert " + type;
+            alertElement.style.display = "block";
+
+            setTimeout(function() {
+                alertElement.style.display = "none";
+            }, 3000);
+        }
+
+        function validateUsername(username) {
+            return username.length >= 3;
+        }
+
+        function validateEmail(email) {
+            // Simple email validation regex
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function validatePassword(password) {
+            return password.length >= 6;
+        }
+
+        document.getElementById("password").addEventListener("input", function() {
+            var password = this.value;
+            var strengthText = document.getElementById("passwordStrength");
+            var strengthLevel = getPasswordStrength(password);
+
+            switch (strengthLevel) {
+                case 0:
+                    strengthText.innerHTML = "<span class='password-weak'></span> Weak";
+                    break;
+                case 1:
+                    strengthText.innerHTML = "<span class='password-medium'></span> Medium";
+                    break;
+                case 2:
+                    strengthText.innerHTML = "<span class='password-strong'></span> Strong";
+                    break;
+                default:
+                    strengthText.innerHTML = "";
+            }
+        });
+
+        function getPasswordStrength(password) {
+            var strength = 0;
+
+            // Check for minimum length
+            if (password.length >= 8) {
+                strength++;
+            }
+
+            // Check for both lowercase and uppercase characters
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) {
+                strength++;
+            }
+
+            // Check for at least one number
+            if (/\d/.test(password)) {
+                strength++;
+            }
+
+            return strength;
+        }
+    </script>
+</body>
+</html>

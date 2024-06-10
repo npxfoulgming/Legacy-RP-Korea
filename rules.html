@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Rules</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="south-korea.png" alt="Logo" class="logo">
+
+        
+        <nav>
+            <ul>
+                <li><a href="index.html"><b>Home</b></a></li>
+                <li><a href="pledges.html"><b>Pledges</b></a></li>
+                <li><a href="packages.html"><b>Packages</b></a></li>
+                <li><a href="oppoints.html"><b>OP Points</b></a></li>
+                <li><a href="unbans.html"><b>UNBANS</b></a></li>
+                <li><a href="rules.html"><b><div class="text"> Server Rules</b></a><div class="options">
+                        <a href="newguide.html" class="option" target="_blank">New_Player_Guide</a>
+                        <a href="jobguide.html" class="option" target="_blank">Basic_Job_Guide</a>
+                        <a href="like.html" class="option" target="_blank">Staff_Rooster</a></div></div></b></a></li>
+                <li><a href="application.html"><b>Application</b></a></li>
+            </ul>
+            
+        </nav>
+     <h1>LegacyRP South-Korea Server Rules</h1>
+</head>
+<body>
+    <style>
+        /* Style for the title */
+        h2 {
+            position: relative;
+            margin-bottom: 10px;
+            cursor: pointer; /* Change cursor to pointer to indicate clickable */
+        }
+
+        /* Style for the bullet points */
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        /* Style for the connecting line */
+        ul:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 10px; /* Adjust the width of the line */
+            height: 2px; /* Adjust the height of the line */
+            background-color: black; /* Adjust the color of the line */
+            transform: translateY(-50%);
+        }
+
+        /* Style for the paragraphs */
+        .paragraphs {
+            display: none; /* Initially hide paragraphs */
+            margin-top: 10px; /* Add space between paragraphs and bullet points */
+            opacity: 0; /* Initially set opacity to 0 for animation */
+            transition: opacity 0.3s ease; /* Add transition for smooth fade-in/out effect */
+        }
+
+        /* Style for active paragraph */
+        .paragraphs.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h2>Server Rules</h2>
+    <ul id="bulletList" class="bullet-list"></ul>
+
+    <div id="paragraphsContainer"></div>
+
+    <script>
+        // Data for list items and corresponding paragraphs
+        var data = [
+            { title: "Community Rules", content: "Community Rules" },
+            { title: "Item 2", content: "Paragraph corresponding to Item 2." },
+            { title: "Item 3", content: "Paragraph corresponding to Item 3." }
+        ];
+
+        // Function to generate list items and paragraphs
+        function generateContent() {
+            var bulletList = document.getElementById("bulletList");
+            var paragraphsContainer = document.getElementById("paragraphsContainer");
+
+            data.forEach(function(item, index) {
+                var listItem = document.createElement("li");
+                listItem.textContent = item.title;
+                listItem.addEventListener("click", function() {
+                    showParagraph(index);
+                });
+                bulletList.appendChild(listItem);
+
+                var paragraph = document.createElement("p");
+                paragraph.textContent = item.content;
+                paragraph.classList.add("paragraphs");
+                paragraphsContainer.appendChild(paragraph);
+            });
+        }
+
+        // Function to show the selected paragraph
+        function showParagraph(index) {
+            var paragraphs = document.querySelectorAll('.paragraphs');
+            paragraphs.forEach(function(paragraph, i) {
+                if (i === index) {
+                    paragraph.classList.add("active");
+                } else {
+                    paragraph.classList.remove("active");
+                }
+            });
+        }
+
+        // Generate content when the page loads
+        generateContent();
+    </script>
+</body>
+</html>
+
+    </header>
+    <footer>
+        <p>&copy; <b>Terms | Privacy | Refund Policy & Shipping and Delivery Policy by FouL Gaming</b></p>
+        <b><a href="https://youtube.com/@npxfoulgaming?si=4bUaOIlgBqi8RZuP" class="link">YouTube</a></b> |
+        <b><a href=" https://discord.gg/stCePkps3V" class="link">Discord</a></b> |
+        <b><a href="https://twitter.com/npxfoulgaming" class="link">Twitter</a></b> |
+        <b><a href="https://www.instagram.com/npxfoulgaming/" class="link">Instagram</a></b> |
+        <b><a href="https://www.twitch.tv/npxfoulgaming" class="link">Twitch</a></b> |
+        <b><a href="https://www.facebook.com/npxfoulgaming" class="link">FaceBook</a></b> |
+        <b><a href="https://www.tiktok.com/@npxfoulgaming?is_from_webapp=1&sender_device=pc" class="link">TikTok</a></b> |
+        <b><a href="https://discord.gg/dwmWZQDYzb" class="link">Server Discord</a></b>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+

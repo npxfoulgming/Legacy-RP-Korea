@@ -1,0 +1,172 @@
+body {
+    font-family: montserrat;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+header {
+    color: #000000;
+    
+}
+    
+
+nav ul {
+    list-style-type: none;
+    margin: 10;
+    padding: 20;
+    
+    
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #000000;
+    text-decoration: none;
+}
+header h1 {
+    color: rgb(133, 131, 131);
+    background-color: #302f2f;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+
+    
+}
+
+
+main {
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding: 20px;
+}
+
+footer {
+    background-color: #363434;
+    color: #b6b6b6;
+    padding: -1px;
+    position: relative;
+    bottom: 12;
+    width: 100%;
+    text-align: center;
+}
+footer a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  /* Hover effect for the footer links */
+  footer a:hover {
+    color: #ffcc00; /* Change to your desired hover color */
+  }
+.logo {
+    width: 100px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    
+}
+
+/* Style for the title */
+h2 {
+    position: relative;
+    margin-bottom: 10px;
+    cursor: pointer; /* Change cursor to pointer to indicate clickable */
+}
+
+/* Style for the bullet points */
+ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+/* Style for the connecting line */
+ul:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 10px; /* Adjust the width of the line */
+    height: 2px; /* Adjust the height of the line */
+    background-color: black; /* Adjust the color of the line */
+    transform: translateY(-50%);
+    transition: height 0.3s ease; /* Add transition effect */
+    
+}
+
+/* Style for the paragraphs */
+.paragraphs {
+    display: none; /* Initially hide paragraphs */
+    margin-top: 10px; /* Add space between paragraphs and bullet points */
+    opacity: 0; /* Initially set opacity to 0 for animation */
+    transition: opacity 0.3s ease; /* Add transition for smooth fade-in/out effect */
+    
+}
+
+/* Style for active paragraph */
+.paragraphs.active {
+    display: block;
+    opacity: 1;
+   
+}
+
+/* Style for active list item */
+li.active {
+    font-weight: bold; /* Highlight the active list item */
+    color: blue; /* Change color of the active list item */
+    
+}
+
+/* Style for search input */
+#searchInput {
+    margin-bottom: 10px;
+
+}
+.text {
+    position: relative; /* Position relative for absolute positioning of tooltip */
+    font-size: 16px; /* Initial font size */
+    color: #292626; /* Initial text color */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    display: flex;
+    align-items: center;
+
+  }
+
+  .text:hover .options {
+    display: flex; /* Show options as a flex container */
+  }
+
+  .options {
+    display: none; /* Initially hide options */
+    position: absolute; /* Position absolutely relative to parent text */
+    top: 100%; /* Position below the text */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    background-color: #b9b7b7; /* Background color of options */
+    padding: 10px; /* Padding of options */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+
+  .option {
+    display: block; /* Display as block element */
+    color: #302f2f; /* Text color of options */
+    font-size: 14px; /* Font size of options */
+    text-decoration: none; /* Remove default underline */
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+  }
+
+  .option:hover {
+    background-color: #ffffff; /* Background color on hover */
+  }
+  
