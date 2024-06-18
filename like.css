@@ -1,76 +1,79 @@
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.image-container {
-  width: 200px;
-  margin: 5px;
-}
-
-.image-container img {
-  width: 100%;
-  height: auto;
-}
-
-.details {
-  display: flex;
-  justify-content: 0cm;
-  align-items: top;
-  margin-top: 0.5px;
-}
-
-
 body {
-  height: 100vh;
-  display: flex;
-  align-items: top;
-  justify-content: left;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
 }
 
-.like-button .heart-icon {
-  height: 100px;
-  width: 100px;
-  background: url("like/heart.png");
-  background-position: left;
-  cursor: pointer;
-  position: absolute;
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
 }
 
-.like-button .heart-icon.liked {
-  animation: like-anim 0.7s steps(28) forwards;
+.employee-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-@keyframes like-anim {
-  to {
-    background-position: right;
-  }
+.employee-card:hover {
+    transform: translateY(-5px);
 }
 
-.like-button .heart-bg {
-  background: rgba(255, 192, 200, 0);
-  border-radius: 50%;
-  height: 60px;
-  width: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 100ms ease;
+.employee-img img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
-.like-button .heart-bg:hover {
-  background: rgba(255, 192, 200, 0.7);
+.employee-info {
+    padding: 20px;
 }
 
-.like-button {
-  display: flex;
-  align-items: center;
+.employee-info h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
-.like-button .likes-amount {
-  font-size: 20px;
-  font-family: "Roboto", sans-serif;
-  color: #888;
-  font-weight: 900;
-  margin-left: 6px;
+.social-media {
+    margin-bottom: 10px;
+}
+
+.social-media a {
+    margin-right: 10px;
+    color: #0073b1;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.social-media a:hover {
+    color: #005482;
+}
+
+.like-dislike {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f5f5f5;
+}
+
+.like-dislike button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    color: #555;
+}
+
+.like-dislike button:hover {
+    color: #0073b1;
+}
+
+.feedback {
+    font-size: 14px;
+    color: #777;
 }
