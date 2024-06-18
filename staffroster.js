@@ -11,12 +11,26 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add more employees as needed
     ];
 
+    // Load likes from localStorage
+    function loadLikes() {
+        return JSON.parse(localStorage.getItem('employeeLikes')) || {};
+    }
+
+    // Save likes to localStorage
+    function saveLikes(likes) {
+        localStorage.setItem('employeeLikes', JSON.stringify(likes));
+    }
+
+    const likes = loadLikes();
+    
     const container = document.getElementById('employee-container');
 
     // Function to create employee cards
     function createEmployeeCard(employee) {
         const card = document.createElement('div');
         card.classList.add('employee-card');
+
+        const employeeLikes = likes[employee.id] || 0;
 
         card.innerHTML = `
             <div class="employee-img">
@@ -36,10 +50,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="like-dislike">
                     <button class="like-btn" data-id="${employee.id}"><i class="fas fa-thumbs-up"></i> Like</button>
-                    <span class="feedback" data-id="${employee.id}">Likes: ${employee.likes}</span>
+                    <span class="feedback" data-id="${employee.id}">Likes: ${employeeLikes}</span>
                 </div>
             </div>
         `;
+
+        if (employeeLikes > 0) {
+            card.querySelector('.like-btn').classList.add('liked');
+        }
 
         container.appendChild(card);
     }
@@ -51,23 +69,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event listener for like button
     container.addEventListener('click', function(event) {
-        const button = event.target;
+        const button = event.target.closest('.like-btn');
 
-        if (button.classList.contains('like-btn')) {
+        if (button) {
             const employeeId = parseInt(button.getAttribute('data-id'));
             const feedback = document.querySelector(`.feedback[data-id="${employeeId}"]`);
 
-            let likes = parseInt(feedback.textContent.match(/Likes: (\d+)/)[1]);
+            let employeeLikes = likes[employeeId] || 0;
 
             if (!button.classList.contains('liked')) {
-                likes++;
+                employeeLikes++;
                 button.classList.add('liked');
             } else {
-                likes--;
+                employeeLikes--;
                 button.classList.remove('liked');
             }
 
-            feedback.textContent = `Likes: ${likes}`;
+            likes[employeeId] = employeeLikes;
+            saveLikes(likes);
+
+            feedback.textContent = `Likes: ${employeeLikes}`;
         }
     });
 });
