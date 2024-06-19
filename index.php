@@ -3,185 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .login-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-        }
-
-        .login-container h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .btn-google {
-            background-color: #db4437;
-            color: #fff;
-        }
-
-        .btn-google:hover {
-            background-color: #c13584;
-        }
-
-        .btn-discord {
-            background-color: #7289da;
-            color: #fff;
-        }
-
-        .btn-discord:hover {
-            background-color: #4e5d94;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-weight: bold;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus {
-            border-color: #009688;
-        }
-
-        .form-group input::placeholder {
-            color: #999;
-        }
-
-        .form-group.checkbox label {
-            display: inline;
-            margin-left: 5px;
-            color: #666;
-        }
-
-        .form-group.checkbox input {
-            display: inline-block;
-            margin-right: 5px;
-            vertical-align: middle;
-        }
-
-        .link {
-            color: #007bff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .link:hover {
-            color: #0056b3;
-        }
-        
-    </style>
+    <title>Register & Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="stylelogin.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <button class="btn btn-google" onclick="loginWithGoogle()">Login with Google</button>
-        <button class="btn btn-discord" onclick="loginWithDiscord()">Login with Discord</button>
-        <hr>
-        <form id="loginForm" action="#" method="post">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            </div>
-            <div class="form-group checkbox">
-                <input type="checkbox" id="rememberMe" name="rememberMe">
-                <label for="rememberMe">Remember Me</label>
-            </div>
-            <button type="submit" class="btn">Login</button>
-            <a href="#" onclick="forgotPassword()" class="link">Forgot Password?</a>
-            <p>Don't have an account? <a href="register.html" class="link">Create Account</a></p>
-        </form>
+    <div class="container" id="signup" style="display:none;">
+      <h1 class="form-title">Register</h1>
+      <form method="post" action="registerlogin.php">
+        <div class="input-group">
+           <i class="fas fa-user"></i>
+           <input type="text" name="fName" id="fName" placeholder="First Name" required>
+           <label for="fname">First Name</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" name="lName" id="lName" placeholder="Last Name" required>
+            <label for="lName">Last Name</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <label for="email">Email</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <label for="password">Password</label>
+        </div>
+       <input type="submit" class="btn" value="Sign Up" name="signUp">
+      </form>
+      <p class="or">
+        ----------or--------
+      </p>
+      <div class="icons">
+        <i class="fab fa-google"></i>
+        <i class="fab fa-facebook"></i>
+      </div>
+      <div class="links">
+        <p>Already Have Account ?</p>
+        <button id="signInButton">Sign In</button>
+      </div>
     </div>
-    <script>
-        function loginWithGoogle() {
-            // OAuth integration for Google login
-        }
 
-        function loginWithDiscord() {
-            // OAuth integration for Discord login
-        }
-
-        function forgotPassword() {
-            // Password recovery logic
-            alert("Forgot Password clicked!");
-        }
-
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form submission
-
-            // Get username and password values
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-            const rememberMe = document.getElementById("rememberMe").checked;
-
-            // Check if username and password are correct
-            if (username === "admin" && password === "password") {
-                alert("Login successful!");
-                // Redirect to home page (replace "home.html" with your home page URL)
-                window.location.href = "home.html";
-        
-
-                if (rememberMe) {
-                    // Store login credentials for future visits
-                }
-                // Redirect to dashboard or perform other actions
-            } else {
-                alert("Incorrect username or password. Please try again.");
-                // Clear input fields or show error message
-            }
-        });
-    </script>
+    <div class="container" id="signIn">
+        <h1 class="form-title">Sign In</h1>
+        <form method="post" action="registerlogin.php">
+          <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email" name="email" id="email" placeholder="Email" required>
+              <label for="email">Email</label>
+          </div>
+          <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" name="password" id="password" placeholder="Password" required>
+              <label for="password">Password</label>
+          </div>
+          <p class="recover">
+            <a href="#">Recover Password</a>
+          </p>
+         <input type="submit" class="btn" value="Sign In" name="signIn">
+        </form>
+        <p class="or">
+          ----------or--------
+        </p>
+        <div class="icons">
+          <i class="fab fa-google"></i>
+          <i class="fab fa-facebook"></i>
+        </div>
+        <div class="links">
+          <p>Don't have account yet?</p>
+          <button id="signUpButton">Sign Up</button>
+        </div>
+      </div>
+      <script src="scriptlogin.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
